@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+require('dotenv').config();
 
 // Models
 const {sequelize} = require('./models');
@@ -15,7 +16,7 @@ const app = express();
 sequelize.sync().then(() => {
     console.log('DB connection success!');
 }).catch(err => {
-   console.err(err);
+   console.error(err);
    process.exit();
 });
 
