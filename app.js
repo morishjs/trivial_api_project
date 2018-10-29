@@ -8,8 +8,8 @@ const logger = require('morgan');
 const {sequelize} = require('./models');
 
 // Routers
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const indexRouter = require('./routes');
+const v1 = require('./routes/v1');
 
 const app = express();
 sequelize.sync().then(() => {
@@ -33,8 +33,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routers
+app.use('/v1', v1);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
